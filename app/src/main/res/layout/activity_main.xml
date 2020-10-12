@@ -7,12 +7,8 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="414dp"
+        android:layout_height="579dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/txt_show"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -38,7 +34,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/ed_num_text"
                 android:layout_width="151dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -46,18 +42,18 @@
                 android:inputType="number" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_sec"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Sec" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/sec_all_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="SEC ALL" />
         </LinearLayout>
 
         <ListView
