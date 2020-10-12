@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             db.execSQL(CREATE_TABLE);
             db.execSQL("INSERT INTO table01 (name,price) values ('香蕉',30)"); // 新增資料
+            db.execSQL("INSERT INTO table01 (name,price) values ('非洲柳丁',87)");
             db.execSQL("INSERT INTO table01 (name,price) values ('西瓜',120)");
             db.execSQL("INSERT INTO table01 (name,price) values ('梨子',250)");
             db.execSQL("INSERT INTO table01 (name,price) values ('水蜜桃',280)");}
