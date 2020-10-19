@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_sec,btn_sec_all;
     Cursor cursor;
     private SQLiteDatabase  db= null;
-    private final static String CREATE_TABLE = "CREATE TABLE table01(_id INTEGER PRIMARY KEY,name TEXT,price INTERGER)";
+    private final static String CREATE_TABLE = "CREATE TABLE table01(_id INTEGER PRIMARY KEY,pname TEXT,price INTERGER)";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +60,12 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             cursor.moveToPosition(position);
             Cursor c=get(id);
-            String s= "id=" + id + "\r\n" + "name=" + c.getString(1) + "\r\n" + "price=" + c.getInt(2);
+            String s= "id=" + id + "\r\n" + "pname=" + c.getString(1) + "\r\n" + "price=" + c.getInt(2);
             Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
         }
     };
 
+    /*
     private void UpdateAdapter(Cursor cursor) {
         if (cursor != null && cursor.getCount() >= 0){
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
@@ -72,6 +73,18 @@ public class MainActivity extends AppCompatActivity {
                     cursor, // 資料庫的 Cursors 物件
                     new String[] {"pname", "price" }, // pname、price 欄位
                     new int[] { android.R.id.text1, android.R.id.text2 }, // 與 pname、price對應的元件
+                    0); // adapter 行為最佳化
+            lv01.setAdapter(adapter); // 將adapter增加到listview01中
+        }
+    }*/
+
+    private void UpdateAdapter(Cursor cursor) {
+        if (cursor != null && cursor.getCount() >= 0){
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+                    R.layout.mylayout, // 包含兩個資料項
+                    cursor, // 資料庫的 Cursors 物件
+                    new String[] {"_id","name", "price" }, // pname、price 欄位
+                    new int[] { R.id.id_txtshow,R.id.id_name_txtshow, R.id.id_price_txtshow}, // 與 pname、price對應的元件
                     0); // adapter 行為最佳化
             lv01.setAdapter(adapter); // 將adapter增加到listview01中
         }
@@ -100,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /*
     private Cursor get(long rowid) throws SQLException
     {
         Cursor cursor= db.rawQuery("SELECT _id, _id||'.'||name pname, price FROM table01 WHERE _id="+rowid,null);
@@ -109,16 +123,35 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "查無此筆資料!", Toast.LENGTH_SHORT).show();
         return cursor; // 傳回_id、pname、price欄位
 
+    }*/
+
+    private Cursor get(long rowid) throws SQLException
+    {
+        Cursor cursor= db.rawQuery("SELECT _id, name , price FROM table01 WHERE _id="+rowid,null);
+        if (cursor.getCount()>0)
+            cursor.moveToFirst();
+        else
+            Toast.makeText(getApplicationContext(), "查無此筆資料!", Toast.LENGTH_SHORT).show();
+        return cursor; // 傳回_id、name、price欄位
+
     }
+
 
     protected void onDestroy(){
         super.onDestroy();
         db.close(); // 關閉資料庫
     }
 
+    /*
     private Cursor getAll() {
         Cursor cursor= db.rawQuery("SELECT _id, _id||'.'||name pname, price FROM table01",null);
         return cursor; // 傳回_id、pname、price欄位
     }
+    */
 
+    private Cursor getAll() {
+        Cursor cursor= db.rawQuery(
+                "SELECT _id, name, price FROM table01",null);
+        return cursor; // 傳回_id、name、price欄位
+    }
 }
